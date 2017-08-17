@@ -1,4 +1,8 @@
-//pass to get details of every function in the program
+/*
+*	LLVM pass to get details of every function in the program
+*	
+*	usage : opt -load <path-to-object-file> -funcinfo <input-program.bc>
+*/
 #include<llvm/Pass.h>
 #include<llvm/Support/FormattedStream.h>
 #include<llvm/IR/InstIterator.h>
@@ -26,7 +30,6 @@ namespace {
 				num_inst++;
 			
 			errs()<<"\nFunction "<<F.getName()<<":";
-			//errs()<<"\nReturn Type: "<<F.getReturnType()->getName();
 			errs()<<"\nNumber of arguments: "<<arg_size;
 			errs()<<"\nNumber of call sites: "<<num_of_uses;
 			errs()<<"\nNumber of basic blocks: "<<size;

@@ -1,4 +1,9 @@
-//pass to implement algebraic simplifications for addition and subtraction and simple constant folding
+/*
+	LLVM pass to perform algebraic simplifications for addition and subtraction
+	and simple constant folding
+	
+	usage : opt -load <path-to-object-file> -algebraic <input-program.bc> -S -emit-llvm [-o output.ll]
+*/
 #include<llvm/IR/BasicBlock.h>
 #include<llvm/IR/Constants.h>
 #include<llvm/IR/Instruction.h>
@@ -28,9 +33,6 @@ namespace {
 		
 		if((operand1 == operand2)&&(operation==1)){
 			IntegerType *intype = dyn_cast<IntegerType>(I.getType());
-			//ConstantInt *zero;
-			//errs()<<"entered";
-			//if(zero = ConstantInt::get(intype->getContext(), getZeroOne<APInt>(intype->getBitWidth(),0)))
 				return ConstantInt::get(intype->getContext(), getZeroOne<APInt>(intype->getBitWidth(),0));
 		}
 		

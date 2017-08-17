@@ -1,15 +1,21 @@
+/*
+*	LLVM pass to count the no. of instructions in each basic block of
+*	input source program
+*	
+*	usage : opt -load <path-to-object-file> -bbcount <input-program.bc>
+*/
+
 #include<llvm/IR/Instruction.h>
 #include<llvm/Pass.h>
 #include<llvm/IR/Function.h>
 #include<llvm/Support/raw_ostream.h>
-
 #include<llvm/ADT/Statistic.h>
 #define DEBUG_TYPE "count"
 
 using namespace llvm;
 
 STATISTIC(count,"number of basic blocks");
-//STATISTIC(counter, "Number of instructions");
+
 static int i=0;
 unsigned int counter;
 
@@ -26,23 +32,10 @@ namespace {
 			for(const auto &i:bb) {
 				counter++;
 			}
-			errs()<<"BB"<<++i<<":"<<counter<<"\n";
+			errs()<<"Basic Block "<<++i<<" has "<<counter<<" instructions\n";
 			return false;
 		}
 		
-	/*	bool runOnFunction(Function &f) override {
-			counter=0;
-			errs()<<"Function "<<f.getName()<<" is there ";
-			
-			for(;const auto &bb;) {
-				counter++;
-			}
-			
-			errs()<<"with "<<counter<<" basic blocks\n";
-			
-			return false;
-		}
-	*/
 	};
 	
 	char BBCount::ID = 0;

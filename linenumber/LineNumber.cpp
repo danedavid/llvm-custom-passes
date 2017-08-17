@@ -1,7 +1,7 @@
 /*
-	to print source line number
-	run clang with -g option to enable debug info
-	run opt with -line option
+*	LLVM pass to print source line number
+*	run clang with -g option to enable debug info
+*	run opt with -line option to run this pass
 */
 #include<llvm/Pass.h>
 #include<llvm/Support/FormattedStream.h>
@@ -20,7 +20,6 @@ namespace {
 				DILocation *Loc = I->getDebugLoc();
 				if(Loc != NULL){
 					unsigned lno = Loc->getLine();					// to get source line number
-					//errs()<< lno <<"\n";
 					return lno;
 				}
 			}

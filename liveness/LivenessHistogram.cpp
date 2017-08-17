@@ -67,13 +67,6 @@ namespace {
             
             int live[50];
             unsigned int n = 0;
-            
-            
-            /*
-            void printHistogram(){
-            	for(unsigned int t=0;t<n;t++)
-            		errs()<<t<<" : "<<live[t]<<"\n";
-			*/
 
             //print functions
 			//live variables before each basic block
@@ -81,11 +74,7 @@ namespace {
                 os << "; ";
                 if (!isa<PHINode>(*(bb))) {
                     const BitVector *bv = (*in)[&*bb];
-/*                    
-                    live[bv->size()]++;
-                    if(bv->size() > n)
-                    	n = bv->size();                    
-*/                    
+
                     for (int i=0; i < bv->size(); i++) {
                         if ( (*bv)[i] ) {
                             os << (*bvIndexToInstrArg)[i]->getName();
@@ -206,20 +195,13 @@ namespace {
                    			count++;
                    	}
                    	
-                   	if(count > n)
+                   	if(count > n) {
                    		n = count+1;
-                   	
-                   	//errs()<<"count : "<<count<<"\n";
+                   	}
                    	
                    	live[count]++;
                 }
 			}
-			/*
-			void printHist(){
-				for(unsigned int i=0;i<n;i++)
-					errs()<<i<<" : "<<live[i]<<"\n";
-			}
-			*/
             
             //evaluate each function
             virtual bool evalFunc(Function &F) {
@@ -261,14 +243,7 @@ namespace {
 
                 return false;
             }
-            /*
-            virtual bool runOnFunction(Module &M) {
-            	//printHist();
-            	for(unsigned int i=0;i<n;i++)
-					errs()<<i<<" : "<<live[i]<<"\n";
-            	return false;
-            }
-            */
+            
             virtual bool runOnModule(Module &M){
             	std::fill_n(live,50,0);
             
